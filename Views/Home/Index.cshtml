@@ -1,8 +1,33 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model List<Microsoft.AspNetCore.Identity.IdentityUser>
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h2>Users List</h2>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Email</th>
+            <th>Username</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var user in Model)
+        {
+            <tr>
+                <td>@user.Email</td>
+                <td>@user.UserName</td>
+                <td>
+                    <a href="@Url.Action("Details", new { id = user.Id })" class="btn btn-info">Details</a>
+                    <a href="@Url.Action("EditUser", new { id = user.Id })" class="btn btn-warning">Edit</a>
+                    <form asp-action="DeleteUser" method="get" style="display:inline;">
+                        <input type="hidden" name="id" value="@user.Id" />
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@* 
+<a href="@Url.Action("CreateUser")" class="btn btn-primary">Create New User</a>
+ *@
