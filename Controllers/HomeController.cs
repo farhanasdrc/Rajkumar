@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Rajkumar.Models;
 using System.Diagnostics;
 
 namespace Rajkumar.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
@@ -15,6 +17,7 @@ namespace Rajkumar.Controllers
 
         public IActionResult Index()
         {
+
             return View();
         }
 
